@@ -108,7 +108,8 @@ function initializeGridStack() {
         animate: true,
         float: false,
         resizable: { handles: 'se' },
-        draggable: { handle: '.widget-header' }
+        draggable: { handle: '.widget-header' },
+        disableOneColumnMode: false
     }, gridElement);
 
     // Responsive columns
@@ -116,16 +117,20 @@ function initializeGridStack() {
     gridStack.on('dragstop', saveLayoutToLocalStorage);
 
     // Handle window resize
-    window.addEventListener('resize', () => {
+    const handleResize = () => {
         const width = window.innerWidth;
         if (width <= 768) {
-            gridStack.column(4);
+            gridStack.column(1);
         } else if (width <= 1024) {
             gridStack.column(8);
         } else {
             gridStack.column(12);
         }
-    });
+    };
+    window.addEventListener('resize', handleResize);
+    
+    // Initial call to set correct columns on load
+    setTimeout(handleResize, 10);
 }
 
 function configureDashboard() {

@@ -871,10 +871,32 @@ select option:checked { background-color: #FFE500; }
 
 /* ─── Responsive ─────────────────────────────────── */
 @media (max-width: 768px) {
-    .navbar { padding: 0 1rem; }
+    .auth-container {
+        padding: 1.5rem;
+        background-position: center;
+        justify-content: center;
+    }
+    .auth-container::before { background: rgba(0, 0, 0, 0.65); }
+    .auth-box { padding: 1.5rem; }
+    
+    .navbar { padding: 0.5rem 1rem; height: auto; }
+    .navbar-content { flex-direction: column; gap: 0.5rem; padding: 0.5rem 0; }
+    .navbar-menu { flex-wrap: wrap; justify-content: center; }
+    
     #content-area { padding: 1rem; }
+    
     .dashboard-header,
-    .orders-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-    .filter-panel { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+    .orders-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .dashboard-controls { flex-wrap: wrap; }
+    
+    .filter-panel { flex-direction: column; align-items: stretch; gap: 1rem; }
+    .filter-group { flex-direction: column; align-items: flex-start; gap: 0.4rem; width: 100%; }
+    .filter-group select { width: 100%; }
+    .filter-btn { width: 100%; }
+    
     .kpi-value { font-size: 1.75rem; }
+    .modal-content { padding: 1.5rem; }
+    .empty-state { padding: 1.5rem; }
+    
+    .orders-table th, .orders-table td { padding: 0.6rem 0.5rem; font-size: 0.8rem; }
 }
