@@ -40,7 +40,7 @@ A modern full-stack web application to manage customer orders with a customizabl
 ## 🎥 Demo Video
 
 👉 Watch full demo here:  
-https://drive.google.com/file/d/1hfZ1r-ozaTE4hpXnw5Zk1sAwdhEb_-Qq/view?usp=drive_link
+https://drive.google.com/file/d/1hfZ1r-ozaTE4hpXnw5Zk1sAwdhEb_-Qq/view?usp=sharing
 
 ## 🧠 Challenges Faced
 
