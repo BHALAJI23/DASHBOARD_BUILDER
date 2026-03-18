@@ -1,0 +1,49 @@
+<!-- Login Component -->
+<div class="auth-container">
+    <div class="auth-box">
+        <h2>Welcome Back</h2>
+        <p>Dashboard Builder Pro</p>
+
+        <div id="login-error" class="error-message"></div>
+        <div id="login-success" class="success-message"></div>
+
+        <form id="login-form" class="auth-form">
+            <div class="form-group">
+                <label for="login-email">Email Address</label>
+                <input type="email" id="login-email" name="email" placeholder="your@email.com" required
+                    autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="password" placeholder="••••••••" required
+                    autocomplete="current-password">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+                <label style="display: flex; align-items: center; font-weight: normal;">
+                    <input type="checkbox" id="login-remember" name="remember" style="margin-right: 0.5rem;">
+                    Remember me
+                </label>
+            </div>
+
+            <button type="submit" class="btn" style="margin-top: 1.5rem;">Login</button>
+        </form>
+
+        <div class="auth-link">
+            Don't have an account?
+            <a href="#signup" onclick="window.switchToSignup()">Sign up here</a>
+        </div>
+
+        <div class="auth-link" style="margin-top: 1rem;">
+            <a href="#" style="font-size: 0.8rem; color: var(--text-muted);">Forgot password?</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        window.handleLoginSubmit();
+    });
+</script>

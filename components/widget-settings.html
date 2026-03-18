@@ -1,0 +1,267 @@
+<!-- Widget Settings Modal Component -->
+<div id="widget-settings-modal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 600px;">
+        <div class="modal-header">
+            <h3>⚙️ Configure Widget</h3>
+            <button class="modal-close" onclick="window.closeWidgetSettings()">✕</button>
+        </div>
+
+        <div class="modal-body">
+            <!-- KPI Widget Settings -->
+            <div id="kpi-settings" style="display: none;">
+                <div class="settings-group">
+                    <label for="metric-type">
+                        <strong>📊 Metric Type</strong>
+                    </label>
+                    <select id="metric-type" class="widget-config-select">
+                        <option value="sum">Sum (Total)</option>
+                        <option value="avg">Average</option>
+                        <option value="count">Count (Number of Orders)</option>
+                        <option value="max">Maximum</option>
+                        <option value="min">Minimum</option>
+                    </select>
+                    <small style="color: var(--text-muted); display: block; margin-top: 0.5rem;">
+                        Choose what calculation to display
+                    </small>
+                </div>
+
+                <div class="settings-group">
+                    <label for="kpi-field">
+                        <strong>📈 Data Field</strong>
+                    </label>
+                    <select id="kpi-field" class="widget-config-select">
+                        <option value="total_amount">Total Amount (Revenue)</option>
+                        <option value="quantity">Quantity</option>
+                        <option value="unit_price">Unit Price</option>
+                    </select>
+                </div>
+
+                <div class="settings-group">
+                    <label for="kpi-label">
+                        <strong>📝 Card Label</strong>
+                    </label>
+                    <input type="text" id="kpi-label" class="widget-config-input" placeholder="e.g., Total Revenue"
+                        value="Total Revenue">
+                </div>
+
+                <div class="settings-group">
+                    <label for="kpi-color">
+                        <strong>🎨 Color Theme</strong>
+                    </label>
+                    <select id="kpi-color" class="widget-config-select">
+                        <option value="primary">Blue (Primary)</option>
+                        <option value="success">Green (Success)</option>
+                        <option value="warning">Orange (Warning)</option>
+                        <option value="danger">Red (Danger)</option>
+                        <option value="secondary">Purple (Secondary)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Chart Widget Settings -->
+            <div id="chart-settings" style="display: none;">
+                <div class="settings-group">
+                    <label for="chart-type">
+                        <strong>📊 Chart Type</strong>
+                    </label>
+                    <select id="chart-type" class="widget-config-select">
+                        <option value="bar">Bar Chart</option>
+                        <option value="line">Line Chart</option>
+                        <option value="area">Area Chart</option>
+                        <option value="scatter">Scatter Chart</option>
+                    </select>
+                </div>
+
+                <div class="settings-group">
+                    <label for="chart-x-axis">
+                        <strong>📍 X-Axis Field</strong>
+                    </label>
+                    <select id="chart-x-axis" class="widget-config-select">
+                        <option value="customer_name">Customer Name</option>
+                        <option value="product_name">Product Name</option>
+                        <option value="order_date">Order Date</option>
+                    </select>
+                </div>
+
+                <div class="settings-group">
+                    <label for="chart-y-axis">
+                        <strong>📊 Y-Axis Field</strong>
+                    </label>
+                    <select id="chart-y-axis" class="widget-config-select">
+                        <option value="total_amount">Total Amount</option>
+                        <option value="quantity">Quantity</option>
+                        <option value="unit_price">Unit Price</option>
+                    </select>
+                </div>
+
+                <div class="settings-group">
+                    <label for="chart-title">
+                        <strong>📝 Chart Title</strong>
+                    </label>
+                    <input type="text" id="chart-title" class="widget-config-input" placeholder="Chart Title"
+                        value="Sales Overview">
+                </div>
+
+                <div class="settings-group">
+                    <label for="chart-height">
+                        <strong>📏 Height (rows)</strong>
+                    </label>
+                    <input type="number" id="chart-height" class="widget-config-input" min="3" max="10" value="5">
+                </div>
+            </div>
+
+            <!-- Pie Chart Settings -->
+            <div id="pie-settings" style="display: none;">
+                <div class="settings-group">
+                    <label for="pie-category">
+                        <strong>📂 Category Field</strong>
+                    </label>
+                    <select id="pie-category" class="widget-config-select">
+                        <option value="customer_name">Customer Name</option>
+                        <option value="product_name">Product Name</option>
+                    </select>
+                </div>
+
+                <div class="settings-group">
+                    <label for="pie-value">
+                        <strong>💰 Value Field</strong>
+                    </label>
+                    <select id="pie-value" class="widget-config-select">
+                        <option value="total_amount">Total Amount</option>
+                        <option value="quantity">Quantity</option>
+                    </select>
+                </div>
+
+                <div class="settings-group">
+                    <label for="pie-title">
+                        <strong>📝 Chart Title</strong>
+                    </label>
+                    <input type="text" id="pie-title" class="widget-config-input" placeholder="Pie Chart Title"
+                        value="Distribution">
+                </div>
+            </div>
+
+            <!-- Table Widget Settings -->
+            <div id="table-settings" style="display: none;">
+                <div class="settings-group">
+                    <label for="table-limit">
+                        <strong>🔢 Number of Records</strong>
+                    </label>
+                    <input type="number" id="table-limit" class="widget-config-input" min="1" max="20" value="5">
+                    <small style="color: var(--text-muted); display: block; margin-top: 0.5rem;">
+                        How many records to display
+                    </small>
+                </div>
+
+                <div class="settings-group">
+                    <label for="table-sort">
+                        <strong>📋 Sort By</strong>
+                    </label>
+                    <select id="table-sort" class="widget-config-select">
+                        <option value="recent">Most Recent</option>
+                        <option value="highest">Highest Amount</option>
+                        <option value="lowest">Lowest Amount</option>
+                    </select>
+                </div>
+
+                <div class="settings-group">
+                    <label>
+                        <strong>📊 Columns to Display</strong>
+                    </label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                        <label style="display: flex; align-items: center; font-weight: normal;">
+                            <input type="checkbox" id="col-customer" checked style="margin-right: 0.5rem;">
+                            Customer
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal;">
+                            <input type="checkbox" id="col-product" checked style="margin-right: 0.5rem;">
+                            Product
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal;">
+                            <input type="checkbox" id="col-quantity" checked style="margin-right: 0.5rem;">
+                            Quantity
+                        </label>
+                        <label style="display: flex; align-items: center; font-weight: normal;">
+                            <input type="checkbox" id="col-price" checked style="margin-right: 0.5rem;">
+                            Price
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-cancel" onclick="window.closeWidgetSettings()">Cancel</button>
+            <button class="btn-save-settings" onclick="window.saveWidgetSettings()">💾 Save Settings</button>
+        </div>
+    </div>
+</div>
+
+<!-- Configure Dashboard Modal -->
+<div id="settings-modal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>➕ Add New Widget</h3>
+            <button class="modal-close" onclick="window.closeSettings()">✕</button>
+        </div>
+
+        <div class="modal-body">
+            <div class="settings-group">
+                <label for="widget-type-select">
+                    <strong>📊 Select Widget Type</strong>
+                </label>
+                <select id="widget-type-select" class="widget-config-select" onchange="window.updateWidgetOptions()">
+                    <option value="">-- Choose Widget Type --</option>
+                    <option value="kpi">📊 KPI Card (Key Performance Indicator)</option>
+                    <option value="bar">📊 Bar Chart</option>
+                    <option value="line">📈 Line Chart</option>
+                    <option value="area">📈 Area Chart</option>
+                    <option value="scatter">🔘 Scatter Chart</option>
+                    <option value="pie">🥧 Pie Chart</option>
+                    <option value="table">📋 Table Widget</option>
+                </select>
+                <small style="color: var(--text-muted); display: block; margin-top: 0.5rem;">
+                    Choose the type of widget you want to add to your dashboard
+                </small>
+            </div>
+
+            <!-- Widget Options Will Be Rendered Here -->
+            <div id="widget-options-container"></div>
+
+            <div
+                style="padding: 1rem; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 0.5rem; margin-top: 1rem;">
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+                    ℹ️ <strong>Tip:</strong> You can drag to reorder widgets, and resize by dragging the bottom-right
+                    corner.
+                </p>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-cancel" onclick="window.closeSettings()">Cancel</button>
+            <button class="btn-primary" id="add-widget-btn" onclick="window.addWidget()">➕ Add Widget</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .widget-config-select,
+    .widget-config-input {
+        width: 100%;
+        padding: 0.75rem;
+        background: rgba(30, 41, 59, 0.5);
+        border: 1px solid var(--glass-border);
+        border-radius: 0.5rem;
+        color: var(--text-light);
+        font-size: 0.95rem;
+        transition: var(--transition);
+    }
+
+    .widget-config-select:focus,
+    .widget-config-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        background: rgba(99, 102, 241, 0.1);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+</style>

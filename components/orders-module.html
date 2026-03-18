@@ -1,0 +1,184 @@
+<!-- Orders Module Component -->
+<div class="orders-section-container">
+    <!-- Header Section -->
+    <div class="orders-header">
+        <div>
+            <h2>Customer Orders Management</h2>
+            <p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">
+                Manage all customer orders, view details, and track transactions
+            </p>
+        </div>
+        <button class="btn-primary" id="new-order-btn" onclick="window.openCreateOrderModal()">
+            ➕ New Order
+        </button>
+    </div>
+
+    <!-- Orders Stats Bar -->
+    <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+        <div
+            style="background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 0.8rem; padding: 1rem;">
+            <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Total Orders</div>
+            <div style="font-size: 1.8rem; font-weight: bold; color: var(--primary-color);" id="total-orders-count">0
+            </div>
+        </div>
+        <div
+            style="background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 0.8rem; padding: 1rem;">
+            <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Total Revenue</div>
+            <div style="font-size: 1.8rem; font-weight: bold; color: var(--success-color);" id="total-revenue-amount">
+                $0.00</div>
+        </div>
+        <div
+            style="background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 0.8rem; padding: 1rem;">
+            <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Average Order</div>
+            <div style="font-size: 1.8rem; font-weight: bold; color: var(--accent-color);" id="average-order-amount">
+                $0.00</div>
+        </div>
+    </div>
+
+    <!-- Search & Filter Bar -->
+    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <input type="search" id="search-orders" placeholder="Search by customer name or product..."
+            style="flex: 1; min-width: 200px; padding: 0.75rem; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: var(--text-light);">
+        <select id="filter-orders"
+            style="padding: 0.75rem; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: var(--text-light);">
+            <option value="">All Orders</option>
+            <option value="today">Today</option>
+            <option value="week">This Week</option>
+            <option value="month">This Month</option>
+        </select>
+    </div>
+
+    <!-- Orders Table -->
+    <div class="orders-table-container">
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th onclick="window.sortOrders('customer_name')" style="cursor: pointer;">
+                        👤 Customer Name
+                        <span id="sort-customer" style="font-size: 0.8rem; margin-left: 0.25rem;">⇅</span>
+                    </th>
+                    <th onclick="window.sortOrders('product_name')" style="cursor: pointer;">
+                        📦 Product
+                        <span id="sort-product" style="font-size: 0.8rem; margin-left: 0.25rem;">⇅</span>
+                    </th>
+                    <th onclick="window.sortOrders('quantity')" style="cursor: pointer;">
+                        🔢 Qty
+                        <span id="sort-quantity" style="font-size: 0.8rem; margin-left: 0.25rem;">⇅</span>
+                    </th>
+                    <th onclick="window.sortOrders('unit_price')" style="cursor: pointer;">
+                        💲 Unit Price
+                        <span id="sort-price" style="font-size: 0.8rem; margin-left: 0.25rem;">⇅</span>
+                    </th>
+                    <th onclick="window.sortOrders('total_amount')" style="cursor: pointer;">
+                        💰 Total
+                        <span id="sort-total" style="font-size: 0.8rem; margin-left: 0.25rem;">⇅</span>
+                    </th>
+                    <th onclick="window.sortOrders('order_date')" style="cursor: pointer;">
+                        📅 Order Date
+                        <span id="sort-date" style="font-size: 0.8rem; margin-left: 0.25rem;">⇅</span>
+                    </th>
+                    <th>⚙️ Actions</th>
+                </tr>
+            </thead>
+            <tbody id="orders-tbody">
+                <tr>
+                    <td colspan="7" style="text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+                        Loading orders...
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div
+        style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+        <button id="prev-page-btn" onclick="window.previousPage()" class="btn-edit">← Previous</button>
+        <div id="pagination-info" style="color: var(--text-muted); font-size: 0.9rem;">Page 1</div>
+        <button id="next-page-btn" onclick="window.nextPage()" class="btn-edit">Next →</button>
+    </div>
+</div>
+
+<!-- Create/Edit Order Modal -->
+<div id="order-modal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modal-title">Create New Order</h3>
+            <button class="modal-close" onclick="window.closeCreateOrderModal()">✕</button>
+        </div>
+
+        <div class="modal-body">
+            <div id="form-errors" class="error-message"></div>
+
+            <form id="order-form" class="order-form">
+                <div class="form-group">
+                    <label for="customer_name">
+                        👤 Customer Name <span style="color: var(--danger-color);">*</span>
+                    </label>
+                    <input type="text" id="customer_name" name="customer_name" placeholder="John Smith" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="product_name">
+                        📦 Product Name <span style="color: var(--danger-color);">*</span>
+                    </label>
+                    <input type="text" id="product_name" name="product_name" placeholder="Laptop, Phone, etc." required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="quantity">
+                            🔢 Quantity <span style="color: var(--danger-color);">*</span>
+                        </label>
+                        <input type="number" id="quantity" name="quantity" min="1" max="10000" placeholder="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="unit_price">
+                            💲 Unit Price <span style="color: var(--danger-color);">*</span>
+                        </label>
+                        <input type="number" id="unit_price" name="unit_price" min="0" step="0.01" placeholder="0.00"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="total_amount">
+                        💰 Total Amount (Auto-calculated)
+                    </label>
+                    <input type="number" id="total_amount" name="total_amount" disabled
+                        style="opacity: 0.6; cursor: not-allowed;" value="0.00">
+                </div>
+
+                <div class="form-group">
+                    <label for="order_date">
+                        📅 Order Date
+                    </label>
+                    <input type="date" id="order_date" name="order_date">
+                </div>
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-cancel" onclick="window.closeCreateOrderModal()">Cancel</button>
+            <button class="btn-primary" onclick="window.submitOrderForm()">Create Order</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Set today's date as default
+    document.getElementById('order_date').valueAsDate = new Date();
+
+    // Auto-calculate total amount
+    document.addEventListener('input', (e) => {
+        if (e.target.id === 'quantity' || e.target.id === 'unit_price') {
+            const quantity = parseFloat(document.getElementById('quantity').value) || 0;
+            const unitPrice = parseFloat(document.getElementById('unit_price').value) || 0;
+            const total = (quantity * unitPrice).toFixed(2);
+            document.getElementById('total_amount').value = total;
+        }
+    });
+</script>

@@ -1,0 +1,60 @@
+<!-- Signup Component -->
+<div class="auth-container">
+    <div class="auth-box">
+        <h2>Create Account</h2>
+        <p>Join Dashboard Builder Pro</p>
+
+        <div id="signup-error" class="error-message"></div>
+        <div id="signup-success" class="success-message"></div>
+
+        <form id="signup-form" class="auth-form">
+            <div class="form-group">
+                <label for="signup-name">Full Name</label>
+                <input type="text" id="signup-name" name="name" placeholder="John Doe" required autocomplete="name">
+            </div>
+
+            <div class="form-group">
+                <label for="signup-email">Email Address</label>
+                <input type="email" id="signup-email" name="email" placeholder="your@email.com" required
+                    autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" name="password" placeholder="At least 8 characters" required
+                    autocomplete="new-password" minlength="8">
+                <small style="color: var(--text-muted); display: block; margin-top: 0.25rem;">
+                    Password must be at least 8 characters long
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="signup-confirm">Confirm Password</label>
+                <input type="password" id="signup-confirm" name="confirmPassword" placeholder="Confirm your password"
+                    required autocomplete="new-password">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+                <label style="display: flex; align-items: flex-start; font-weight: normal; font-size: 0.9rem;">
+                    <input type="checkbox" id="signup-agree" name="agree"
+                        style="margin-right: 0.5rem; margin-top: 0.25rem;" required>
+                    <span>I agree to the Terms of Service and Privacy Policy</span>
+                </label>
+            </div>
+
+            <button type="submit" class="btn" style="margin-top: 1.5rem;">Create Account</button>
+        </form>
+
+        <div class="auth-link">
+            Already have an account?
+            <a href="#login" onclick="window.switchToLogin()">Login here</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        window.handleSignupSubmit();
+    });
+</script>

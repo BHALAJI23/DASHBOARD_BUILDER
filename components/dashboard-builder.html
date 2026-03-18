@@ -1,0 +1,102 @@
+<!-- Dashboard Builder Component -->
+<div class="dashboard-builder-container">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div>
+            <h2>📊 Dashboard Builder</h2>
+            <p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">
+                Create and customize your personal analytics dashboard with drag-and-drop widgets
+            </p>
+        </div>
+
+        <div class="dashboard-controls">
+            <button class="btn-config" id="config-btn" onclick="window.configureDashboard()" title="Add new widget">
+                ⚙️ Configure
+            </button>
+            <button class="btn-config" id="save-btn" onclick="window.saveDashboard()"
+                style="background: rgba(16, 185, 129, 0.8);" title="Save dashboard layout">
+                💾 Save
+            </button>
+            <button class="btn-config" id="load-btn" onclick="window.loadDashboard()"
+                style="background: rgba(139, 92, 246, 0.8);" title="Load saved layout">
+                📂 Load
+            </button>
+            <button class="btn-config" id="reset-btn" onclick="window.resetDashboard()"
+                style="background: rgba(239, 68, 68, 0.8);" title="Clear all widgets">
+                🔄 Reset
+            </button>
+        </div>
+    </div>
+
+    <!-- Filter Panel -->
+    <div class="filter-panel">
+        <div class="filter-group">
+            <label>📅 Date Filter:</label>
+            <select id="date-filter" onchange="window.applyDateFilter(this.value)">
+                <option value="all">All Time</option>
+                <option value="today">Today</option>
+                <option value="7days">Last 7 Days</option>
+                <option value="30days">Last 30 Days</option>
+                <option value="90days">Last 90 Days</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>📊 Metric Type:</label>
+            <select id="metric-filter">
+                <option value="all">All Metrics</option>
+                <option value="revenue">Revenue</option>
+                <option value="quantity">Quantity</option>
+                <option value="orders">Orders</option>
+            </select>
+        </div>
+
+        <button class="filter-btn" onclick="window.applyFilters()">🔍 Apply Filters</button>
+    </div>
+
+    <!-- Grid Container -->
+    <div class="grid-container">
+        <div class="grid-stack" id="grid-stack">
+            <!-- Widgets will be added here -->
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" style="display: none;">
+        <div class="empty-state">
+            <div class="empty-state-icon">📊</div>
+            <h3>No Widgets Yet</h3>
+            <p>Start building your dashboard by clicking the "⚙️ Configure" button above and adding your first widget.
+            </p>
+            <button class="btn-primary" onclick="window.configureDashboard()" style="margin-top: 1rem;">
+                ➕ Add Your First Widget
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dashboard-builder-container {
+        animation: fadeIn 0.3s ease-in;
+    }
+
+    .grid-container {
+        margin-top: 2rem;
+        min-height: 600px;
+    }
+
+    .grid-stack {
+        position: relative;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+        border: 2px dashed var(--glass-border);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        min-height: 600px;
+        transition: var(--transition);
+    }
+
+    .grid-stack.drag-over {
+        border-color: var(--primary-color);
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    }
+</style>
